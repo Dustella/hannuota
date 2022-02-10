@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8" />
+    <style type="text/css">
+        .container{border:solid 1px black;width:200px; height:200px; padding:10px;}
+        .hanoi{border:solid 1px black; padding:5px;}
+        #hanoi3{width:150px; height:150px;}
+        #hanoi2{width:100px; height:100px;}
+        #hanoi1{width:60px; height:60px;}
+        
+    </style>
+    <script type="text/javascript">
+        function allowDrop(ev) {
+            ev.preventDefault();
+        }
+ 
+        function drag(ev) {
+            ev.dataTransfer.setData("Text", ev.target.id);
+        }
+ 
+        function drop(ev) {
+            ev.preventDefault();
+            var data = ev.dataTransfer.getData("Text");
+            var droper = document.getElementById(data);
+            if (droper.childElementCount == 0) { //判断是否是多个一起拖动，不是才可以进行拖动
+                if (droper.clientHeight < ev.target.clientHeight && droper.clientWidth < ev.target.clientWidth) {
+                    ev.target.appendChild(document.getElementById(data));
+                }
+            }
+            else {alert("一次只能拖动一个汉诺塔");}
+        }
+    </script>
+</head>
+<body>
+<div id="container1" class="container" οndrοp="drop(event)" οndragοver="allowDrop(event)"><div id="hanoi3" class="hanoi"  οndrοp="drop(event)" οndragοver="allowDrop(event)"draggable="true" οndragstart="drag(event)"><div id="hanoi2" class="hanoi"draggable="true" οndrοp="drop(event)" οndragοver="allowDrop(event)" οndragstart="drag(event)"><div id="hanoi1" class="hanoi"draggable="true" οndragstart="drag(event)"></div></div></div></div>
+<div id="container2" class="container" οndrοp="drop(event)" οndragοver="allowDrop(event)"></div>
+<div id="container3" class="container" οndrοp="drop(event)" οndragοver="allowDrop(event)"></div>
+</body>
+</html>
